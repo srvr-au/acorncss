@@ -1,0 +1,86 @@
+<!doctype html><html lang="en-au"><head><meta name="robots" content="index,nofollow,noarchive">
+
+<title>AcornCSS</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cssjs/as.css" media="screen, projection">
+<script src="cssjs/as.js"></script>
+
+</head>
+<body onresize="fib.fit('brand');">
+<div id="container">
+
+<div id="brandmenu">
+<div id="brand" class="bgd-dtol nowrap"><span class="nowrap">ASCSS</span></div>
+<div id="navbar" class="navbar"><a href="#">test1</a><a href="">Test4</a><a class="submenu1-hdr" onClick="moreless('subnav1','submenu1-hdr')">submenu</a><div id="subnav1" class="subnav"><a href="#">- Testa</a><a href="#">- Testb</a><a href="#">- test2</a><a href="#">- test2</a></div><a href="#">test2</a><a href="#">test3</a></div>
+<div id="menubar"><button id="menu" class="btn-up" onclick="moreless('navbar','menu','btn-dn');">&nbspMenu</button></div>
+</div>
+<script type="text/javascript">fib.fit('brand');</script>
+
+<div class="txt-box">
+<h1>Domain Name Registration</h1>
+<p> offers you automated Domain Name Registration and Management. We make it easy to register both Australian Domain Names and International Domain Names.</p>
+<p>Our Domain Name control panel makes it very easy for you to manage your Domain Name 24x7. We offer free DNS for all registered Domain Names.</p>
+<p>We also offer whois privacy - this keeps your Domain Name registration email, phone and address private. Not needed for .au domains. Other Domain Name registration results in many unsolicited phone calls and emails if you don't purchase whois privacy.</p>
+<p>You can also backorder Domain Names that are already taken. The chance of getting a Domain name on backorder is pretty slim, but we offer it if you want it.</p>
+</div>
+
+<div class="grid-2">
+<div class="card bgcol-lte">
+<div class="crd-hdr">Price Examples per year</div>
+<p>.com.au and .net.au - $21.49</p>
+<p>.sydney and .melbourne - $79.99</p>
+<p>.com, .net - $24.20</p>
+</div>
+<div class="card bgcol-lte">
+<div class="crd-hdr">Links to our NEW Console</div>
+<p>If you already have an account:<br><a href="#"><button onclick="makeClick()">Login</button></a></p>
+<p>If you want to search for a Domain Name to register:<br><a href="#"><button onclick="makeClick()">Search</button></a></p>
+<p>If you want to transfer a Domain Name to us:<br><a href="#"><button onclick="makeClick()">Transfer</button></a></p>
+</div>
+</div>
+
+<div class="txt-box">If you still have Domain Names on our OLD system you can manage them here: <a href="#"><button onclick="makeClick()">Login to Legacy Console</button></a>
+</div>
+
+<div class="txt-box">
+<h2>Support FAQs</h2>
+<div class="faq-qst">How do I transfer a Domain Name?</div>
+<div class="faq-ans">Login to your current registrar's control panel. Check that the domain does not have Domain Privacy and is not locked. Copy the Domain Password. Go to your new registrar and click the transfer in link and enter the domain name to be transferred and the domain password. That's it.</div>
+
+<div class="faq-qst">How do I use DNS?</div>
+<div class="faq-ans">Firstly you should only use your Domain Name Registrars DNS as the last option. You should use your Website Hosting DNS as first preference and Email Hosting DNS as second preference. If neither of these provide DNS then you are welcome to use ours. Firstly click the link to manage the Domain Name you want to use DNS. Click the dropdown to park the Domain Name. This gives you the correct Nameservers. Now edit your DNS, you can add A records, MX records and other record types too. You get the correct records from your hosting and email providers. DNS services are self serve.</div>
+
+<h2>&#128231; Contact Us</h2>
+<p>Fast knowledgeable Support is offered via email.</p>
+<div class="eml-grid card bgcol-lte">
+<div>
+<form action="contactus.php" method="post" target="_blank">
+<fieldset>
+    <label for="nameField">Your Name</label>
+    <input id="nameField" name="name" type="text" required>
+    <label for="emailField">Your Email</label>
+   <input id="emailField" name="email" type="email" required>
+</div>
+<div>
+    <label for="messageField">Your Message</label>
+    <textarea name="message" id="messageField" required></textarea>
+    <input onclick="makeClick()" value="Send" type="submit">
+  </fieldset>
+
+</form>
+</div>
+</div>
+
+<h2>&#128712; About Us</h2>
+<p class="txt-hero">We have been offering Website Hosting and Domain Name Registration for over 20 years.</p>
+
+</div>
+
+
+</div>
+<audio id="audio" src="click.mp3" ></audio>
+</body>
+
+</html>
