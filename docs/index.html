@@ -1,0 +1,303 @@
+<!doctype html><html lang="en-au"><head><meta name="robots" content="index,nofollow,noarchive">
+
+<title>AcornCSS</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cssjs/acorn.css?v=0.2" media="screen, projection">
+<script src="cssjs/acorn.js?v=0.2"></script>
+
+</head>
+<body>
+<div id="container">
+
+<div id="brandmenu">
+<div id="brand" class="bgd-dtol nowrap"><span class="nowrap">AcornCSS</span></div>
+</div>
+
+<div class="pad-lr">
+<h1>What is AcornCSS?</h1>
+
+<div>Status: In development. Version:0.2</div>
+
+<ul><h2>Features</h2>
+<li><strong>Designed Portrait First - </strong>Most modern CSS Frameworks are designed "Mobile First" and this is great, as far as it goes... There are all sorts of assumptions about mobiles. However the real difference is that mobiles are mostly used with Portrait orientation. AcornCSS is designed for Portrait First then responsively adjusts the web design if the device is in landscape orientation (desktops or smartTV). If the screen width is less than 1000px then AcornCSS assumes you are using a simple mobile or watch and keeps the design in Portrait mode.</li>
+
+<li><strong>Small - </strong>AcornCSS does not change browser default unless necessary. AcornCSS only includes frequently needed functions.</li>
+
+
+
+</ul>
+<p>AcornCSS is a simple, mobile first CSS Framework. Most people access the internet with their mobile, every year more and more people access via mobile in preference to desktop. It simply makes sense to design a website firstly for devices that access your website the most. Designing websites that are truly mobile first also future-proofs your work. AcornCSS is designed for mobile phone browsers first (Portrait mode), if the browser is in landscape mode (naturally for desktop and smart TV) then its responsive characteristics kick in to display the page suitable for a wider screen. So in essence a person can view mobile layout in portrait mode and turn the mobile to landscape to view desktop layout.</p>
+<p><strong>Since this is mobile first you should be viewing this page in portrait mode on your phone or tablet.</strong></p>
+<p>When we say AcornCSS is simple it means we have only included classes that will be useful most of the time. Simple also means using meaningful classnames. For instance the classname "clearfloat" clears a float, the classname "width-50" makes an object 50% of the viewport. This way classnames become very easy to remember.</p>
+<h2>Typography</h2>
+<p>Default font size is 100% - in other words whatever is the default in the current browser. Most other frameworks use pixels and on mobile it's too small and on desktop too big. 100% is the perfect size to read - turn your mobile to portrait and see the text become smaller, then bigger when you turn back to portrait.</p>
+<p>All font sizes are based on rem, not pixels not em. this means they scale properly. Classname "font-12" is 20% bigger (1.2rem) or 120% of default browser font size.</p>
+<p>Most other frameworks build on what has gone before and include all sorts of obsolete junk (like using pixels for font size). We have designed AcornCSS from the start for mobile devices.</p>
+
+
+<h1>AcornCSS images</h1>
+<p>A website is mostly made up of images and text. Therefore these are our primary focus. Text is put into a text box that simply gives padding on the left and right (pad-lr). Images can also be put into this div to give padding or made fullscreen.</p>
+</div>
+
+<h5 class="pad-lr">Full width image</h5>
+<img src="sunset.jpg" alt="sunset image">
+
+<div class="pad-lr">
+
+<h5>Image in cards</h5>
+<div class="card"><img src="sunset.jpg" alt="sunset image" class="rndcnr-top">
+<p class="center-txt">Explanation of photo at bottom</p>
+</div>
+<div class="card">
+<p class="center-txt">Explanation of photo at top</p>
+<img src="sunset.jpg" alt="sunset image" class="rndcnr-bot">
+</div>
+<h5>A card 60% width and centered</h5>
+<img src="sunset.jpg" alt="sunset image" class="card width-60 center-blk">
+
+
+<div class="card">
+<h3 class="pad-lr">A card with header, full width image and text</h3>
+<img src="sunset.jpg" alt="sunset image">
+<div class="pad-lr">
+<p class="center-txt">centered text to explain the nice sunset</p>
+<p>text text and more text</p>
+<p>text text and more text</p>
+<p>text text and more text</p>
+</div>
+</div>
+
+<h2>Scattered Polaroid Images</h2>
+<p>Something a little different to do with images.</p>
+<div class="spacer-10"></div>
+<div class="polaroid rotate-r center-blk">
+  <img src="https://picsum.photos/284/213?random=1" alt="Random image" width="284" height="213">
+  <p>A random image</p>
+</div>
+
+<div class="polaroid rotate-l center-blk">
+  <img src="https://picsum.photos/284/213?random=2" alt="Random image" width="284" height="213">
+  <p>Another random image.</p>
+</div>
+<div class="spacer-20"></div>
+</div>
+
+<h5 class="pad-lr">Image floated left and right with odd/even background colours.</h5>
+<div class="odd">
+<div class="floatbox pad-4">
+<img class="floatright" src="judy.jpg" alt="judy">
+<h4>Judy</h4>
+<p>Tiny picture for movie floated right with text wrapped.</p>
+</div>
+<div class="floatbox pad-4">
+<img class="floatleft" src="knivesout.jpg" alt="knives out">
+<h4>Knives Out</h4>
+<p>Tiny picture for movie floated left with text wrapped and alternate colours.</p>
+</div>
+<div class="floatbox pad-4">
+<img class="floatright" src="littlewomen.jpg" alt="little women">
+<h4>Little Women</h4>
+<p>Tiny picture for a movie floated right with text wrapped and paragraphed.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet dui accumsan sit amet nulla facilisi. Imperdiet dui accumsan sit amet nulla facilisi morbi tempus iaculis.</p>
+</div>
+</div>
+
+<div class="pad-lr"><h2>A Slideshow</h2>
+<p>It seems every website has one of these - I think they suck, but, here's one anyway. Each image or div shows for 5 seconds. Available for 3 to 9 images or divs.</p>
+</div>
+
+<div class="ssbox">
+<img class="ssani-3" src="https://picsum.photos/1200/300?random=1" alt="">
+<img class="ssani-3 sschild-2" src="https://picsum.photos/1200/300?random=2" alt="">
+<img class="ssani-3 sschild-3" src="https://picsum.photos/1200/300?random=3" alt="">
+</div>
+
+<div class="pad-lr">
+<p>Can also be used with divs to make a testamonials type slideshow.</p>
+</div>
+
+<div class="ssbox center-txt">
+<div class="ssani-4 pad-lr width-80 center-blk card"><div class="ssright"><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p><i>Spiderman</i></p></div></div>
+<div class="ssani-4 sschild-2 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">Groovy name!</p><p><i>Superman</i></p></div></div>
+<div class="ssani-4 sschild-3 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">In a class of it's own.</p><p><i>Wonderwoman</i></p></div></div>
+<div class="ssani-4 sschild-4 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">Brilliant! Boy Wonder</p><p><i>Batman</i></p></div></div>
+
+</div>
+
+<div class="pad-lr">
+
+<h2 id="modalh">Modals can be useful</h2>
+
+<a class="button" href="#open-modal">Click to view Modal</a>
+
+<div id="open-modal" class="overlay">
+<div class="modal rndcnr-4">
+<header class="modal-head bgcol-L4 rndcnr-top pad-lr"><h2>Terms and Conditions</h2></header>
+<div class="modal-body pad-lr">
+<p>Lorem ipsum dolor sit amet consectetur adipiscing elit proin eu, mi turpis pharetra facilisi hac vestibulum fermentum risus volutpat, curabitur hendrerit parturient orci posuere cras natoque viverra. Fusce id viverra habitasse interdum mi sed turpis, nullam odio ultricies curabitur netus porttitor metus, faucibus tempor lacinia laoreet sem aenean. Odio hendrerit vel interdum natoque dapibus volutpat augue justo, cursus class eros venenatis blandit primis ante, aptent aliquam imperdiet erat cras convallis massa.</p> <p>Porta taciti penatibus commodo varius facilisi egestas nisl integer phasellus, congue cubilia fringilla turpis conubia massa iaculis urna, facilisis sapien magnis mollis praesent tempus ligula mi. Curabitur consequat porttitor tempor sem purus auctor condimentum ante, praesent tempus per quisque suspendisse porta sollicitudin blandit sociosqu, et ullamcorper semper posuere rutrum curae fusce. Aliquam pharetra aliquet elementum luctus ultricies risus parturient condimentum suspendisse enim nisi rutrum volutpat, tincidunt dictumst habitasse praesent integer natoque odio purus nec etiam ligula. Dictumst nascetur pellentesque phasellus netus fermentum nisl duis laoreet curabitur bibendum, interdum hendrerit sagittis habitasse venenatis tempus felis himenaeos eu, iaculis ridiculus habitant dis non nibh metus penatibus id.</p> <p>Primis lobortis a convallis erat condimentum potenti diam euismod per, nunc duis tempor ridiculus praesent sollicitudin sagittis conubia risus commodo, est fusce vestibulum metus nisl nullam dui aenean. Fames posuere tempor tristique facilisis varius habitasse nec at, sagittis faucibus fringilla mus dignissim penatibus curabitur inceptos, convallis imperdiet malesuada cras aliquet non proin. Netus suspendisse dui elementum condimentum sed non habitasse augue, congue etiam egestas eleifend sagittis ridiculus inceptos sodales, massa gravida dictumst vitae feugiat dis enim.</p> <p>Id netus cursus pellentesque justo metus sociosqu primis fermentum eros cras, morbi vestibulum dictumst hac eu orci placerat porta turpis. Sem non risus himenaeos tortor arcu per nunc odio, molestie sociis porta tristique cum fusce mi, erat quisque morbi dictumst natoque faucibus pretium. Facilisis per sed velit accumsan magnis parturient in, ut eu sodales primis pretium neque, rhoncus urna eget sociis proin lobortis. Dapibus ligula pellentesque ad sollicitudin cras euismod auctor nam quis, vehicula aliquam eu bibendum integer volutpat venenatis odio etiam, lacus conubia potenti purus primis sagittis vestibulum a.</p> <p>Cras turpis leo platea sodales eu risus velit curae faucibus tempor sociosqu et torquent, sapien nulla porttitor nibh varius nostra montes magnis metus suspendisse augue eleifend. Volutpat praesent curabitur tortor facilisis ultrices nullam est libero hac maecenas felis duis, ad accumsan montes blandit mollis taciti orci senectus turpis malesuada penatibus tincidunt, integer a inceptos torquent quam laoreet neque netus quis lacinia etiam. Augue velit ac litora nascetur rutrum mattis donec ultricies tempus varius nisl, condimentum dignissim auctor habitasse conubia lobortis sodales vitae nam sollicitudin bibendum class, et eu ad senectus duis ridiculus erat pulvinar justo metus.</p>
+</div>
+<div class="modal-foot flex-center-all bgcol-L4 rndcnr-bot"><a href="#modalh" title="Close" class="button">I Agree</a></div>
+    </div>
+</div>
+
+
+
+<div include-html="content.html"></div>
+<p> </p>
+<h2>Tables that are responsive</h2>
+
+<div class="tablebox">
+<table>
+<tr><th>Name</th><th>Street Address</th><th>City</th><th>Postcode</th><th>State</th><th>Country Code</th><th>Phone</th><th>Email</th></tr>
+
+<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
+
+<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
+
+<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
+
+<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
+
+<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
+
+</table></div>
+
+
+
+
+<h5>We use native utf-8 icons - why bother adding an icon library when utf-8 has tons.</h5>
+<div class="font-14">
+<span class="i-wait spin"></span> Wait
+<br>
+<span class="i-home"></span> Home
+<br>
+<span class="i-mobile"></span> Mobile
+<br>
+<span class="i-email"></span> Email
+<br>
+<span class="i-smiley"></span> Smiley
+<br>
+<span class="i-minus"></span> Minus
+<br>
+<span class="i-plus"></span> Plus
+<br><span class="i-menu"></span> Menu
+<br><span class="i-cross"></span> Cross
+<br><span class="i-tick"></span> Tick
+<br><span class="i-lock"></span> Lock
+<br><span class="i-pointright"></span> Point Right
+<br><span class="i-trophy"></span> Trophy
+<br><span class="i-infoperson"></span> Info Person
+<br><span class="i-arrow-dn"></span> Arrow Down
+<br><span class="i-arrow-up"></span> Arrow Up
+<br><span class="i-cart"></span> Shopping Cart
+<br><span class="i-search"></span> Search
+<br><span class="i-card"></span> Credit Card
+<br><span class="i-money"></span> Money
+<br><span class="i-triangle-dn"></span> Triangle Down
+<br><span class="i-triangle-up"></span> Triangle Up
+<br><span class="i-triangle-r"></span> Triangle Right
+<br><span class="i-triangle-l"></span> Triangle Left
+<br><span class="i-blackflag"></span> Black Flag
+<br><span class="i-ok"></span> OK
+<br><span class="i-star"></span> Star
+<br><span class="i-stop"></span> Stop
+</div>
+
+
+<p>Lets test some headings</p>
+<h1>h1 Domain Name</h1>
+<h2>h2 Domain Name</h2>
+<h3>h3 Domain Name</h3>
+<h4>h4 Domain Name</h4>
+<h5>h5 Domain Name</h5>
+<h6>h6 Domain Name</h6>
+
+<h1>Alerts</h1>
+<div class="bgcol-alert pad-lr alert">
+<span onclick="this.parentElement.style.display='none'" class="close i-cross"></span>
+<h1 class="i-warning"> Warning</h1>
+<p>Text goes here.</p>
+</div>
+
+
+</div>
+
+<div id="accdn1-box" class="pad-lr">
+<h4 id="accdn1-ctl" onclick="accordion('1', 'bgcol-L3');" class="i-minus i-plus"> Header with hidden content (Accordion)</h4>
+<div id="accdn1-txt" class="hide pad-lr">
+<p>a paragraph of info</p>
+<p>More info</p>
+</div></div>
+
+<div class="pad-lr">
+<div id="accdn2-box" class="pad-lr">
+<h4 id="accdn2-ctl" onclick="accordion('2', 'card');" class="i-arrow-dn"> Learn all about crunch</h4>
+<div id="accdn2-txt" class="hide">
+<p>crunch is good</p>
+<p>More crunch is better</p>
+</div></div>
+</div>
+
+
+<div class="grid-2">
+<div class="card pad-lr bgcol-L3">
+<h4>Price Examples per year</h4>
+<p>.com.au and .net.au - $21.49</p>
+<p>.sydney and .melbourne - $79.99</p>
+<p>.com, .net - $24.20</p>
+</div>
+<div class="card pad-lr bgcol-L2">
+<h4>Links to our NEW Console</h4>
+<p>If you already have an account:<br><a href="#"><button onclick="makeClick()">Login</button></a></p>
+<p>If you want to search for a Domain Name to register:<br><a href="#"><button onclick="makeClick()">Search</button></a></p>
+<p>If you want to transfer a Domain Name to us:<br><a href="#"><button onclick="makeClick()">Transfer</button></a></p>
+</div>
+</div>
+
+<div class="pad-lr">If you still have Domain Names on our OLD system you can manage them here: <a href="#"><button onclick="makeClick()">Login to Legacy Console</button></a>
+</div>
+
+<div class="pad-lr">
+<h2>Support FAQs</h2>
+<div class="faq-qst">How do I transfer a Domain Name?</div>
+<div class="faq-ans">Login to your current registrar's control panel. Check that the domain does not have Domain Privacy and is not locked. Copy the Domain Password. Go to your new registrar and click the transfer in link and enter the domain name to be transferred and the domain password. That's it.</div>
+
+<div class="faq-qst">How do I use DNS?</div>
+<div class="faq-ans">Firstly you should only use your Domain Name Registrars DNS as the last option. You should use your Website Hosting DNS as first preference and Email Hosting DNS as second preference. If neither of these provide DNS then you are welcome to use ours. Firstly click the link to manage the Domain Name you want to use DNS. Click the dropdown to park the Domain Name. This gives you the correct Nameservers. Now edit your DNS, you can add A records, MX records and other record types too. You get the correct records from your hosting and email providers. DNS services are self serve.</div>
+
+<h2><span class="i-email"></span> Contact Us</h2>
+<p>Fast knowledgeable Support is offered via email.</p>
+<div class="grid-2 card bgcol-L3">
+<div>
+<form action="contactus.php" method="post" target="_blank">
+<fieldset>
+    <label for="nameField">Your Name</label>
+    <input id="nameField" name="name" type="text" required>
+    <label for="emailField">Your Email</label>
+   <input id="emailField" name="email" type="email" required>
+   </fieldset>
+</div>
+<div>
+<fieldset>
+    <label for="messageField">Your Message</label>
+    <textarea name="message" id="messageField" required></textarea>
+    <input onclick="makeClick()" value="Send" type="submit">
+  </fieldset>
+
+</form>
+</div>
+</div>
+
+<p class="txt-hero">Hero Text is a big centered bunch of text.</p>
+
+</div>
+
+
+</div>
+<audio id="audio" src="click.mp3" ></audio>
+<script>includeHTML();</script>
+</body>
+
+</html>

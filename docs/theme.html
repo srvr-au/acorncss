@@ -1,0 +1,281 @@
+<!doctype html><html lang="en-au"><head><meta name="robots" content="index,nofollow,noarchive">
+
+<title>AcornCSS Theme Generator</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="cssjs/acorn.css?v=0.2" media="screen, projection">
+<script src="cssjs/acorn.js?v=0.2"></script>
+
+<script src="cssjs/w3color.js"></script>
+
+<style>
+.colorinput {
+    width:105px;
+    padding:25px 0 15px 0;
+}
+.colorslider {
+    padding:30px 0 15px 0;
+}
+.tableslider {
+    width:100%;
+    border-collapse:collapse;
+}
+.pointer {
+    text-align:center;display:none;position:absolute;top:-14px;left:-6px;
+}
+.pointer div{
+    background-color:#ffffff;     
+    border:1px solid #aaaaaa;
+    height:24px;
+    width:40px;
+    padding:2px 4px;
+    position:absolute;
+    text-align:center;
+    top:-14px;
+    left:-15px;
+    color:#000000;   
+    border-radius:4px;
+    font:14px verdana;
+}
+.pointer div::selection {
+    color: #000000;
+    background: #ffffff;
+}
+.pointer i{
+    color:#000000;
+}
+
+</style>
+</head>
+<body>
+<div id="container">
+<div class="pad-lr">
+<h1>AcornCSS Theme Generator</h1>
+<p>AcornCSS Themes are simply color schemes. We use 7 colors, 6 shades of a single middle color. Using a single color with 6 shades means that you never have to worry about your color mix looking odd. Its just a single color!</p>
+
+
+<h3>Create a Theme</h3>
+
+<div id="result01" style="background-color:hsl(0,100%,50%);" class="pad-4">
+<div><span id="hsl01">hsl(0,100%,50%)</span> | <span id="rgb01">rgb(255, 0, 0)</span> | <span id="hex01">#ff0000</span></div>
+</div>
+
+<div>Step 1 - Choose a base color or hue. Click anywhere on the colorslider or change the input field.</div>
+<div class="colorslider"><div id="huetable"></div></div>
+<div>Hue&nbsp;(H):&nbsp;<input type="number" style="width:70px" id="hue01" oninput="setColor(this)" onchange="setColor(this)" value="0"></div>
+
+<div>Step 2 - Choose a saturation. Click anywhere on the colorslider or change the input field.</div>
+<div class="colorslider"><div id="saturationtable"></div></div>
+<div>Sat (S): <input type="number" style="width:70px;" id="sat01" oninput="setColor(this)" onchange="setColor(this)" value="100"></div>
+
+<div>
+      <input type="hidden" style="width:70px;" id="lig01" value="68" disabled>
+  </div>
+  <div class="colorslider">
+    <div id="lightnesstable"></div>
+  </div>
+<hr>
+
+<h3>Your CSS</h3>
+<div id="mycss" class="card pad-lr"></div>
+<div id="mycsstable"></div>
+<p>Sometimes you may have a logo and wish to match your theme to one of the colors in the logo. Use a dropper to get the hex value and input it below. The page will create a theme matching the hue and saturation.</p>
+<input type="text" id="color" class="" onchange=""
+size="8" style="height:42px;padding-left:4px" value="#efc050">
+<button class="" style="margin-bottom:4px;padding:10px 16px" onclick="createThemeFromHex()">Create 
+Theme</button>
+
+<script>
+function submitOnEnter(e) {
+    keyboardKey = e.which || e.keyCode;
+    if (keyboardKey == 13) {
+        setFullColor();
+    }
+}
+function clickHue(hue) {
+    var h = document.getElementById("hue01");
+    h.value = hue;
+    document.getElementById("sat01").value = 100;
+    setColor(h);
+}
+function clickSat(sat) {
+    var s = document.getElementById("sat01");
+    s.value = sat;
+    setColor(s);
+}
+function clickLig(lig) {
+    var l = document.getElementById("lig01");
+    l.value = lig;
+    setColor(l);
+}
+function drawHueTable(hue) {
+    var x, i, n;
+    x = "<table class='tableslider'>"
+    x += "<tr>";
+    n = 0;
+    for (i = 0; i <= 360; i++) {
+        n = i;
+        x += "<td";
+        x += " style='position:relative;padding:0;'><div class='pointer hue' id='huepointer" + n + "'><div>" + n + "</div><i class='i-triangle-dn'></i></div></td>";
+    }
+    x += "</tr>";
+    x += "<tr>";
+    n = 0;
+    for (i = 0; i <= 360; i++) {
+        n = i;
+        x += "<td style='background-color:hsl(" + n + ",100%,50%);height:22px;padding:0;' onmousemove='tooltip(0, " + n + ")' onclick='clickHue(" + n + ")'></td>";
+    }
+    x += "</tr>";
+    x += "</table>";
+    document.getElementById("huetable").innerHTML = x;
+}
+function drawSatTable(hue) {
+    var x, i;
+    x = "<table class='tableslider'>"
+    x += "<tr>";
+    for (i = 0; i <= 100; i++) {
+        x += "<td style='position:relative;padding:0;'><div class='pointer' id='satpointer" + i + "'><div>" + i + "</div><i class='i-triangle-dn'></i></div></td>";
+    }
+    x += "</tr>";
+    x += "<tr>";
+    for (i = 0; i <= 100; i++) {
+        x += "<td onmousemove='tooltip(1, " + i + ")' onclick='clickSat(" + i + ")' style='padding:0;height:22px;background-color: hsl(" + hue + ", " + i + "%, 50%)'></td>";
+    }
+    x += "</tr></table>";
+    document.getElementById("saturationtable").innerHTML = x;
+}
+function drawLigTable(hue,sat) {
+    var x, i;
+    x = "<table class='tableslider'>"
+    x += "<tr>";
+    for (i = 0; i <= 100; i++) {
+        x += "<td style='position:relative;padding:0;'><div class='pointer' id='ligpointer" + i + "'><div>" + i + "</div><i class='i-triangle-dn'></i></div></td>";
+    }
+
+    x += "</tr>";
+    x += "<tr>";
+    for (i = 0; i <= 100; i++) {
+        x += "<td style='padding:0;height:22px;background-color: hsl(" + hue + ", " + sat + "%," + i + "%)'></td>";
+    }
+    x += "</tr></table>";
+    document.getElementById("lightnesstable").innerHTML = x;
+}
+drawHueTable(0);
+drawSatTable(0);
+drawLigTable(0,100);
+</script>
+
+<script>
+var btnclck = false;
+if (window.addEventListener) {              
+    window.addEventListener("mousedown", function () {btnclck = true; });
+} else if (window.attachEvent) {                 
+    window.attachEvent("onmousedown", function () {btnclck = true; });
+}
+if (window.addEventListener) {              
+    window.addEventListener("mouseup", function () {btnclck = false; });
+} else if (window.attachEvent) {                 
+    window.attachEvent("onmouseup", function () {btnclck = false; });
+}
+function tooltip(e, n) {
+    var x;
+    if (btnclck) {
+        if (e == 0) { x = document.getElementById("hue01"); }
+        if (e == 1) { x = document.getElementById("sat01"); }
+        if (e == 2) { x = document.getElementById("lig01"); }                
+        x.value = n;
+        setColor(x);
+    }
+}
+
+function createThemeFromHex() {
+var y = document.getElementById("color").value;
+x = w3color(y).toHsl();
+document.getElementById("hue01").value = x.h.toFixed(0);
+document.getElementById("sat01").value = x.s.toFixed(2)*100;
+document.getElementById("lig01").value = 50;
+setColor(x);
+}
+
+function setColor(elmnt) {
+var ele, col, h, s, l, rgb;
+h = document.getElementById("hue01");
+s = document.getElementById("sat01");
+l = document.getElementById("lig01");
+elmnt.value = Number(elmnt.value);
+if (parseInt(elmnt.value) < 0) {elmnt.value = "0";}
+if (elmnt.id == "hue01") {
+    if (parseInt(elmnt.value) > 360) {elmnt.value = "360";}
+} else {
+    if (parseInt(elmnt.value) > 100) {elmnt.value = "100";}
+}
+rgb = w3color("hsl(" + h.value + ", " + s.value + "%, " + l.value + "%)");
+document.getElementById("result01").style.backgroundColor = rgb.toHslString();
+document.getElementById("hsl01").innerHTML = rgb.toHslString();
+document.getElementById("rgb01").innerHTML = rgb.toRgbString();
+document.getElementById("hex01").innerHTML = rgb.toHexString();
+for (i = 0; i <= 360; i++) {
+    document.getElementById("huepointer" + i).style.display = "none";
+}
+drawSatTable(h.value);
+drawLigTable(h.value,s.value);
+for (i = 0; i <= 100; i++) {
+    document.getElementById("satpointer" + i).style.display = "none";
+    document.getElementById("ligpointer" + i).style.display = "none";
+}
+document.getElementById("huepointer" + h.value).style.display = "inline";
+document.getElementById("satpointer" + s.value).style.display = "inline";
+document.getElementById("ligpointer30").style.display = "inline";
+document.getElementById("ligpointer30").innerHTML = "<div>D3</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer40").style.display = "inline";
+document.getElementById("ligpointer40").innerHTML = "<div>D2</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer50").style.display = "inline";
+document.getElementById("ligpointer50").innerHTML = "<div>D1</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer60").style.display = "inline";
+document.getElementById("ligpointer60").innerHTML = "<div>mid</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer70").style.display = "inline";
+document.getElementById("ligpointer70").innerHTML = "<div>L1</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer80").style.display = "inline";
+document.getElementById("ligpointer80").innerHTML = "<div>L2</div><i class='i-triangle-dn'></i>";
+document.getElementById("ligpointer90").style.display = "inline";
+document.getElementById("ligpointer90").innerHTML = "<div>L3</div><i class='i-triangle-dn'></i>";
+createCSS(h.value, s.value);
+}
+function setFullColor() {
+    var color = w3color(document.getElementById("hsl01").value);
+    var hsl = color.toHsl();
+    document.getElementById("hue01").value = hsl.h.toFixed(0);
+    document.getElementById("sat01").value = (hsl.s * 100).toFixed(0);
+    document.getElementById("lig01").value = (hsl.l * 100).toFixed(0);
+    setColor(document.getElementById("hue01"));
+}
+color = w3color("ff0000");
+document.getElementById("hsl01").value = color.toHslString();
+setFullColor();
+
+function createCSS(h, s){
+var l;
+l = 50;
+var D3rgb = w3color("hsl(" + h + ", " + s + "%, 30%)");
+var D2rgb = w3color("hsl(" + h + ", " + s + "%, 40%)");
+var D1rgb = w3color("hsl(" + h + ", " + s + "%, 50%)");
+var midrgb = w3color("hsl(" + h + ", " + s + "%, 60%)");
+var L1rgb = w3color("hsl(" + h + ", " + s + "%, 70%)");
+var L2rgb = w3color("hsl(" + h + ", " + s + "%, 80%)");
+var L3rgb = w3color("hsl(" + h + ", " + s + "%, 90%)");
+txt = ":root{--theme-D3:" + D3rgb.toHexString() + "; ";
+txt += "--theme-D2:" + D2rgb.toHexString() + "; ";
+txt += "--theme-D1:" + D1rgb.toHexString() + "; ";
+txt += "--theme-mid:" + midrgb.toHexString() + "; ";
+txt += "--theme-L1:" + L1rgb.toHexString() + "; ";
+txt += "--theme-L2:" + L2rgb.toHexString() + "; ";
+txt += "--theme-L3:" + L3rgb.toHexString() + ";}";
+document.getElementById("mycss").innerHTML = txt;
+txt = '<table style="width:100%;"><tr><td style="color:#ffffff;background-color:' + D3rgb.toHexString() + '">D3</td><td style="color:#ffffff;background-color:' + D2rgb.toHexString() + '">D2</td><td style="color:#ffffff;background-color:' + D1rgb.toHexString() + '">D1</td><td style="color:#000000;background-color:' + midrgb.toHexString() + '">mid</td><td style="color:#000000;background-color:' + L1rgb.toHexString() + '">L1</td><td style="color:#000000;background-color:' + L2rgb.toHexString() + '">L2</td><td style="color:#000000;background-color:' + L3rgb.toHexString() + '">L3</td></table>';
+document.getElementById("mycsstable").innerHTML = txt;
+}
+</script>
+
+</body>
+</html>
