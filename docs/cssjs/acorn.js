@@ -13,4 +13,20 @@ function getCookie(cname){var name=cname+"=";var ca=document.cookie.split(';');f
 
 function includeHTML(){var z,i,elmnt,file,xhttp;z=document.getElementsByTagName("*");for(i=0;i<z.length;i+=1){elmnt=z[i];file=elmnt.getAttribute("include-html");if(file){xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState==4){if(this.status==200){elmnt.innerHTML=this.responseText}if(this.status==404){elmnt.innerHTML="Content not found."}elmnt.removeAttribute("include-html");includeHTML()}};xhttp.open("GET",file,true);xhttp.send();return}}}
 
+function openTab(evt, tabName) {
+  var i, x, tabs;
+  x = document.getElementsByClassName("tabContent");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tabs = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    tabs[i].className = tabs[i].className.replace(" tabActive", "");
+  }
+  if(tabName != 'none'){
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " tabActive";
+  }
+}
+
 

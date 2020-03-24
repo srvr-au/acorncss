@@ -62,6 +62,7 @@ fieldset,legend{margin: 0 1vw;}
 @keyframes fadeout{from{opacity:1} to{opacity:0}}
 @keyframes zoomin{from{transform:scale(0)} to{transform:scale(1)}}
 
+.positionBox{position:relative;}
 .position-topl{position:absolute;left:0;top:0;}
 .position-topr{position:absolute;right:0;top:0;}
 .position-botl{position:absolute;left:0;bottom:0;}
@@ -95,6 +96,7 @@ div{padding:0;margin:0;}
 .width-40{width:40%;}
 .width-20{width:20%;}
 
+.spacer-5{padding:5px;}
 .spacer-10{padding:10px;}
 .spacer-20{padding:20px;}
 .spacer-30{padding:30px;}
@@ -128,7 +130,7 @@ div{padding:0;margin:0;}
 .hide{display:none;}
 .show{display:block;}
 
-.floatbox:after,.floatbox:before,.clearfloat:after,.clearfloat:before{content:"";display:table;clear:both}
+.floatbox:after,.floatbox:before,.clearfloat:after,.clearfloat:before{content:"";display:table;clear:both;}
 .floatright{float:right;margin:0 0 10px 10px;}
 .floatleft{float:left;margin:0 10px 10px 0;}
 
@@ -139,6 +141,14 @@ div{padding:0;margin:0;}
 .bgcol-D1{background-color:var(--theme-D1);}
 .bgcol-D2{background-color:var(--theme-D2);}
 .bgcol-D3{background-color:var(--theme-D3);}
+
+.bgcolWhite{background-color:#ffffff;}
+.bgcolGray1{background-color:#F5F5F5;}
+.bgcolGray2{background-color:#E8E8E8;}
+.bgcolGray3{background-color:#DCDCDC;}
+.bgcolGray4{background-color:#D3D3D3;}
+.bgcolGray5{background-color:#C8C8C8;}
+.bgcolBlack{background-color:#000000;}
 
 .color-L3{color:var(--theme-L3);}
 .color-L2{color:var(--theme-L2);}
@@ -209,8 +219,14 @@ div{padding:0;margin:0;}
 .rotate-r{transform: rotate(8deg);}
 .rotate-l{transform: rotate(-8deg);}
 
+.scrollBox{display:flex;flex-wrap:nowrap;overflow-x:auto;}
+.scrollItem{flex: 0 0 auto;}
 
-
+.tab{border-radius:5px 5px 0 0;
+    padding:10px 5px;
+    margin:0 2px;
+    background-color:#e8e8e8;}
+.tabActive{border-bottom:1px solid white;background-color:white;}
 
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit'] {padding:2px 15px;vertical-align: middle;text-align: center;border-radius: 10px;text-decoration:none;font-weight:bold;font-size:1rem;color:black;cursor:pointer;box-shadow:3px 3px 6px #777;white-space:nowrap;display:inline-block;border:1px solid black;background-color:var(--theme-L3);outline:0;}
@@ -283,7 +299,10 @@ body{margin-bottom: 20vw;}
 .grid-2 {display:grid;grid-gap:1rem;grid-template-rows:auto auto;padding:1rem;}
 
 
-
+@media only screen and (orientation:landscape){
+body{margin:0;}
+#brandmenu{position:static;}
+}
 
 @media only screen and (orientation:landscape) and (min-width:1002px){
 body{margin:10px 0;background-color:var(--theme-L3);background-image:linear-gradient(var(--theme-L3), var(--theme-D3));background-attachment:fixed;}
