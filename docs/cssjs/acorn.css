@@ -104,7 +104,7 @@ div{padding:0;margin:0;}
 .spacer-50{padding:50px;}
 
 .error, .alert, .notice, .success, .info {padding:0 3vw 1vw 3vw;margin-bottom:1.0rem;}
-.bgcol-info {background-color:#eoeff6;}
+.bgcol-info {background-color:#e0eff6;}
 .bgcol-alert {background-color:#fdeeb3;}
 .bgcol-success {background-color:#deefa8;}
 .bgcol-error {background-color:#fdc3c2;}
