@@ -1,9 +1,10 @@
-<!doctype html><html lang="en-au"><head><meta name="robots" content="index,nofollow,noarchive">
+<!doctype html><html lang="en-au"><head><meta charset="utf-8">
 
+<meta name="robots" content="index,nofollow,noarchive">
 <title>AcornCSS</title>
 <meta name="description" content="">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" type="text/css" href="cssjs/acorn.css?v=0.2" media="screen, projection">
 <script src="cssjs/acorn.js?v=0.2"></script>
 
@@ -21,16 +22,17 @@
 <div>Status: In development. Version:0.2</div>
 
 <ul><h2>Features</h2>
-<li><strong>Designed Portrait First - </strong>Most modern CSS Frameworks are designed "Mobile First" and this is great, as far as it goes... There are all sorts of assumptions about mobiles. However the real difference is that mobiles are mostly used with Portrait orientation. AcornCSS is designed for Portrait First then responsively adjusts the web design if the device is in landscape orientation (desktops or smartTV). If the screen width is less than 1000px then AcornCSS assumes you are using a simple mobile or watch and keeps the design in Portrait mode.</li>
+<li><strong>Designed Mobile First - </strong>Mobile First Design means that you won't find any "hover" CSS in this framework. touch screens don't use hover. Mobile First means designing for portrait mode with fallback for landscape orientation. If in landscape mode the screen width is less than 1000px then AcornCSS assumes you are using a simple mobile or watch and keeps the design in Portrait mode.</li>
 
 <li><strong>Small - </strong>AcornCSS does not change browser default unless necessary. AcornCSS only includes frequently needed functions.</li>
 
-
+<li><strong>Easy to Remember - </strong>Consistent, descriptive classnames. For instance the classname "clearFloat" clears a float, the classname "width-50" makes an object 50% of its parent (generally the viewport). This way classnames become very easy to remember.</li>
 
 </ul>
-<p>AcornCSS is a simple, mobile first CSS Framework. Most people access the internet with their mobile, every year more and more people access via mobile in preference to desktop. It simply makes sense to design a website firstly for devices that access your website the most. Designing websites that are truly mobile first also future-proofs your work. AcornCSS is designed for mobile phone browsers first (Portrait mode), if the browser is in landscape mode (naturally for desktop and smart TV) then its responsive characteristics kick in to display the page suitable for a wider screen. So in essence a person can view mobile layout in portrait mode and turn the mobile to landscape to view desktop layout.</p>
-<p><strong>Since this is mobile first you should be viewing this page in portrait mode on your phone or tablet.</strong></p>
-<p>When we say AcornCSS is simple it means we have only included classes that will be useful most of the time. Simple also means using meaningful classnames. For instance the classname "clearfloat" clears a float, the classname "width-50" makes an object 50% of the viewport. This way classnames become very easy to remember.</p>
+<div class="card pad-lr center-txt bgcol-alert"><p><strong>This page demonstrates AcornCSS, as it is designed Mobile First - you should be viewing it in a mobile.</strong></p></div>
+
+<div class="spacer-10"></div>
+
 <h2>Typography</h2>
 <p>Default font size is 100% - in other words whatever is the default in the current browser. Most other frameworks use pixels and on mobile it's too small and on desktop too big. 100% is the perfect size to read - turn your mobile to portrait and see the text become smaller, then bigger when you turn back to portrait.</p>
 <p>All font sizes are based on rem, not pixels not em. this means they scale properly. Classname "font-12" is 20% bigger (1.2rem) or 120% of default browser font size.</p>
@@ -125,7 +127,7 @@
 <div class="ssani-4 sschild-4 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">Brilliant! Boy Wonder</p><p><i>Batman</i></p></div></div>
 
 </div>
-
+<div class="spacer-20"></div>
 <div class="pad-lr">
 
 <h2 id="modalh">Modals can be useful</h2>
@@ -142,10 +144,12 @@
     </div>
 </div>
 
+<div class="spacer-20"></div>
 
+<div class="card bgcol-info"><p><div include-html="content.html"></div></p></div>
 
-<div include-html="content.html"></div>
-<p> </p>
+<div class="spacer-20"></div>
+
 <h2>Tables that are responsive</h2>
 
 <div class="tablebox">
@@ -163,6 +167,40 @@
 <tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
 
 </table></div>
+<div class="spacer-20"></div>
+
+</div>
+
+<div class="scrollBox bgcol-L3" style="padding:10px 0 0 2px;">
+<button onclick="openTab(event,'none')" class="font-14" style="margin:0 10px 10px 0;">&times;</button>
+    <button class="scrollItem tab" onclick="openTab(event,'tab1')">Shipping xxxxxxxxxxxxx</button>
+    <button class="scrollItem tab" onclick="openTab(event,'tab2')">Payment xxxxxxxxxx</button>
+    <button class="scrollItem tab" onclick="openTab(event,'tab3')">Returns xxxxxxxxxx</button>
+  </div>
+  
+  <div id="tab1" class="tabContent positionBox hide pad-lr">
+    <h2>Shipping</h2>
+    <p>Lots of text about our shipping.</p>
+  </div>
+
+  <div id="tab2" class="tabContent positionBox hide pad-lr">
+    <h2>Payment</h2>
+    <p>You can pay via Credit Card or your PayPal Balance to our PayPal account.</p>
+    
+<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/PP_AcceptanceMarkTray-NoDiscover_243x40.png" alt="Buy now with PayPal" /></td></tr></table><!-- PayPal Logo -->
+  </div>
+
+  <div id="tab3" class="tabContent positionBox hide pad-lr">
+    <h2>Returns</h2>
+    <p>Contact us if you need to make a return. No returns without authorisation number.</p>
+  </div>
+  <div class="spacer-5 bgcol-L3"></div>
+
+<div class="pad-lr">
+
+<div class="spacer-20"></div>
+
+
 
 
 
@@ -205,6 +243,7 @@
 <br><span class="i-stop"></span> Stop
 </div>
 
+<div class="spacer-20"></div>
 
 <p>Lets test some headings</p>
 <h1>h1 Domain Name</h1>
@@ -214,6 +253,8 @@
 <h5>h5 Domain Name</h5>
 <h6>h6 Domain Name</h6>
 
+<div class="spacer-20"></div>
+
 <h1>Alerts</h1>
 <div class="bgcol-alert pad-lr alert">
 <span onclick="this.parentElement.style.display='none'" class="close i-cross"></span>
@@ -221,6 +262,7 @@
 <p>Text goes here.</p>
 </div>
 
+<div class="spacer-20"></div>
 
 </div>
 
@@ -240,6 +282,7 @@
 </div></div>
 </div>
 
+<div class="spacer-20"></div>
 
 <div class="grid-2">
 <div class="card pad-lr bgcol-L3">
