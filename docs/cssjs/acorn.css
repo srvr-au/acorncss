@@ -229,7 +229,7 @@ div{padding:0;margin:0;}
 .tabActive{border-bottom:1px solid white;background-color:white;}
 
 
-.button, button, input[type='button'], input[type='reset'], input[type='submit'] {padding:2px 15px;vertical-align: middle;text-align: center;border-radius: 10px;text-decoration:none;font-weight:bold;font-size:1rem;color:black;cursor:pointer;box-shadow:3px 3px 6px #777;white-space:nowrap;display:inline-block;border:1px solid black;background-color:var(--theme-L3);outline:0;}
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {padding:2px 15px;vertical-align: middle;text-align: center;border-radius: 10px;text-decoration:none;font-weight:bold;font-size:1rem;color:black;cursor:pointer;box-shadow:3px 3px 6px #777;white-space:nowrap;display:inline-block;border:1px solid black;outline:0;}
 
 input[type='button']:focus, input[type='reset']:focus, input[type='submit']:focus {
 box-shadow:none;outline:0;background-color:var(--theme-D2);}
