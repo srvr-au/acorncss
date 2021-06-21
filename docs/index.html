@@ -5,65 +5,615 @@
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" type="text/css" href="cssjs/acorn.css?v=0.2" media="screen, projection">
-<script src="cssjs/acorn.js?v=0.2"></script>
+
+<style>
+/* Theme - just enter the Hue and Saturation of a base color. */
+:root{--Hue:220;--Sat:69%;}
+</style>
+
+<!--
+<link rel="stylesheet" type="text/css" href="cssjs/acorn.css?v=0.3" media="screen, projection">
+<script src="cssjs/acorn.js?v=0.3"></script>
+-->
+
+<style>
+@charset 'utf-8';
+/* AcornCSS v0.3 | GPL-3.0 License | https://github.com/acorncss/acorncss */
+
+/* General setup */
+:root{--res-cnr:2vw;--Dark:hsl(var(--Hue),var(--Sat),10%);--D3:hsl(var(--Hue),var(--Sat),30%);--D2:hsl(var(--Hue),var(--Sat),40%);--D1:hsl(var(--Hue),var(--Sat),50%);--Mid:hsl(var(--Hue),var(--Sat),60%);--L1:hsl(var(--Hue),var(--Sat),70%);--L2:hsl(var(--Hue),var(--Sat),80%);--L3:hsl(var(--Hue),var(--Sat),90%);--Light:hsl(var(--Hue),var(--Sat),97%);}
+*,::before,::after {box-sizing: border-box;}
+html{font-size:100%;line-height:1.5;}
+body{font-family:sans-serif;margin:0;background:var(--Light);}
+ul,ol,dd,menu{padding-left:1vw;list-style-position: inside;}
+blockquote,figure{margin:1em 5vw;}
+div{padding:0;margin:0;}
+
+/*
+#acornBox::after{content: "Styled using AcornCSS";display:block;text-align:center;width:50%;margin:50px auto 0 auto;border:1px solid var(--Mid);background:var(--L3);border-radius:10px;color:var(--Mid);}
+*/
+
+/* Mobile first */
+canvas,iframe,img,input,select,svg,textarea,video{max-width:100%;max-height:100%;overflow-y: auto;object-fit: contain;}
+img{display:block;}
+
+/* Nice red border to spot errors */
+.viewBorder{border:1px solid red;}
+
+/* Setup branding and any buttons or menu */
+body{margin-bottom: 25vw;}
+
+#brandmenu{position:fixed;bottom:0;z-index:10;width:100%;display: flex;flex-direction: column;background-color:var(--L3);}
+#brand{height:12vw;line-height:12vw;text-align:center;color:#000000;font-weight:bold;font-size:9.0vw;text-shadow:0.1rem 0.1rem 0.2rem #ffffff, -0.1rem -0.1rem #ffffff, 0.1rem 0.1rem 0.1rem #000000;width:100%;background-image:linear-gradient(var(--L3), var(--D3));order:2;}
+
+#menubar{padding:4px;order:1;display:flex;flex-flow: row wrap;justify-content: space-around;}
+
+nav{max-width:700px;width:80vw;}
+nav ol {counter-reset: section;list-style-type: none;}
+nav ol li a{text-decoration:none;}
+nav li::before {counter-increment: section;content: counters(section, ".") " ";}
+
+/* Modal */
+.overlay {position: fixed;background-color: rgba(255, 255, 255, 0.9);top: 0;right: 0;bottom: 0;left: 0;z-index: 999;visibility: hidden;opacity: 0;pointer-events: none;transition: all 0.3s;}
+.modal {max-width:800px;max-height:90vh;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
+.overlay:target {visibility: visible;opacity: 1;pointer-events: auto;}
+.close{position:absolute;top:0;right:0;font-size:1.4rem;text-decoration:none;padding:0 10px;}
+
+/* Alerts */
+.alertRed, .alertGold, .alertTheme, .alertGreen, .alertBlue, .alertBW {padding:0 3vw;display: flex;justify-content: center;align-items: center;font-weight:bold;box-shadow:5px 5px 10px #777;border-radius:var(--res-cnr);margin:0 0 10px 0;}
+.alertRed{border:2px solid hsl(0,100%,30%);border-left:10px solid hsl(0,100%,30%);background-color:hsl(0,100%,90%);box-shadow:5px 5px 10px hsl(0,100%,10%);}
+.alertGold{border:2px solid hsl(60,100%,30%);border-left:10px solid hsl(60,100%,30%);background-color:hsl(60,100%,90%);box-shadow:5px 5px 10px hsl(60,100%,10%);}
+.alertTheme{border:2px solid var(--D3);border-left:10px solid var(--D3);background-color:var(--L3);box-shadow:5px 5px 10px var(--Dark);}
+.alertGreen{border:2px solid hsl(120,100%,30%);border-left:10px solid hsl(120,100%,30%);background-color:hsl(120,100%,90%);box-shadow:5px 5px 10px hsl(120,100%,10%);} 
+.alertBlue{border:2px solid hsl(240,100%,30%);border-left:10px solid hsl(240,100%,30%);background-color:hsl(240,100%,90%);box-shadow:5px 5px 10px hsl(240,100%,10%);}
+.alertBW{border:2px solid hsl(0,0%,30%);border-left:10px solid hsl(0,0%,30%);background-color:hsl(0,0%,90%);box-shadow:5px 5px 10px hsl(0,0%,10%);}
+
+.card {border:1px solid var(--D3);background:var(--L3);border-radius:var(--res-cnr);box-shadow:5px 5px 10px var(--Dark);}
+.cardHeader{overflow:hidden;height:10vh;background:var(--L1);border-radius:var(--res-cnr) var(--res-cnr) 0 0;font-weight:bold;}
+.cardBody{overflow: auto;max-height:70vh;}
+.cardFooter{height:10vh;background:var(--L1);border-radius:0 0 var(--res-cnr) var(--res-cnr);}
+
+.rndcnrT{border-radius:var(--res-cnr) var(--res-cnr) 0 0;display:block;}
+.rndcnrB{border-radius:0 0 var(--res-cnr) var(--res-cnr);display:block;}
+.rndcnrTB{border-radius:var(--res-cnr) 0 var(--res-cnr) 0;display:block;}
+.rndcnrBT{border-radius:0 var(--res-cnr) 0 var(--res-cnr);display:block;}
+.rndcnrR{border-radius:var(--res-cnr) 0 0 var(--res-cnr);display:block;}
+.rndcnrL{border-radius:0 var(--res-cnr) var(--res-cnr) 0;display:block;}
+.rndcnr-4{border-radius:var(--res-cnr);display:block;}
+
+.shadowBox{box-shadow:5px 5px 10px #777;}
+.centerBox{margin-left:auto;margin-right:auto;}
+
+.floatBox{}
+.floatBox:after,.floatBox:before,.clearfloat:after,.clearfloat:before{content:"";display:table;clear:both;}
+.floatRight{float:right;margin:0 0 10px 10px;}
+.floatLeft{float:left;margin:0 10px 10px 0;}
+
+/* Typography */
+h1{font-size:2.0rem;margin:0.5rem 0;}
+h2{font-size:1.8rem;margin:0.5rem 0;}
+h3{font-size:1.6rem;margin:0.5rem 0;}
+h4{font-size:1.2rem;margin:0.5rem 0;}
+h5{font-size:1.0rem;margin:0.5rem 0;}
+h6{font-size:0.8rem;margin:0.5rem 0;}
+
+.font-08{font-size:0.8rem;}
+.font-12{font-size:1.2rem;}
+.font-14{font-size:1.4rem;}
+.font-16{font-size:1.6rem;}
+.font-18{font-size:1.8rem;}
+.font-20{font-size:2.0rem;}
+
+.txtHero{color:var(--D3);text-align:center;font-size:1.5rem;font-style:italic;font-weight:bold;}
+
+.txtShadow{text-shadow:1px 1px 2px white,2px 2px 4px #000000;}
+.txtShadowD3{text-shadow:1px 1px 2px white,2px 2px 4px var(--D3);}
+.txtShadowBlackGlow{text-shadow:1px 1px 2px white,0 0 8px var(--D3),0 0 25px var(--L1);}
+.txtShadowWhiteGlow{color: white;text-shadow: 1px 1px 2px black,0 0 8px var(--D3),0 0 25px var(--L1);}
+
+.txtCenter{text-align:center;}
+.txtRight{text-align:right;}
+.txtLeft{text-align:left;}
+.txtJustified{txt-align:justified;}
+
+
+
+
+
+
+
+/* Colors */
+.bgcol-L3{background-color:var(--L3);}
+.bgcol-L2{background-color:var(--L2);}
+.bgcol-L1{background-color:var(--L1);}
+.bgcol-mid{background-color:var(--Mid);}
+.bgcol-D1{background-color:var(--D1);}
+.bgcol-D2{background-color:var(--D2);}
+.bgcol-D3{background-color:var(--D3);}
+
+.bgcolWhite{background-color:#ffffff;}
+.bgcolGray1{background-color:#F5F5F5;}
+.bgcolGray2{background-color:#E8E8E8;}
+.bgcolGray3{background-color:#DCDCDC;}
+.bgcolGray4{background-color:#D3D3D3;}
+.bgcolGray5{background-color:#C8C8C8;}
+.bgcolBlack{background-color:#000000;}
+
+.color-L3{color:var(--L3);}
+.color-L2{color:var(--L2);}
+.color-L1{color:var(--L1);}
+.color-mid{color:var(--Mid);}
+.color-D1{color:var(--D1);}
+.color-D2{color:var(--D2);}
+.color-D3{color:var(--D3);}
+
+.bgd-dtol{background-color:var(--L3);background-image:linear-gradient(var(--D3), var(--L3));}
+.bgd-ltod{background-color:var(--L3);background-image:linear-gradient(var(--L3), var(--D3));}
+
+
+/* utf-8 icons */
+.i-mobile:before{content:'\1F4F1';}
+.i-email:before{content:'\1F4E7';}
+.i-smiley:before{content:'\1F600';}
+.i-minus:before{content:'\2212';}
+.i-plus:before{content:'\002B';}
+.i-menu:before{content:'\2630';}
+.i-cross:before{content:'\2716';}
+.i-tick:before{content:'\2714';}
+.i-lock:before{content:'\1F512';}
+.i-pointright:before{content:'\1F449';}
+.i-trophy:before{content:'\1F3C6';}
+.i-infoperson:before{content:'\1F481';}
+.i-home:before{content:'\1F3E1';}
+.i-eye:before{content:'\1F441';}
+.i-arrow-dn:before{content:'\21E9';}
+.i-arrow-up:before{content:'\21E7';}
+.i-warning:before{content:'\26A0';}
+.i-cart:before{content:'\1F6D2';}
+.i-search:before{content:'\1F50D';}
+.i-card:before{content:'\1F4B3';}
+.i-money:before{content:'\1F4B5';}
+.i-triangle-dn:before{content:'\25BC';}
+.i-triangle-up:before{content:'\25B2';}
+.i-triangle-r:before{content:'\25B6';}
+.i-triangle-l:before{content:'\25C0';}
+.i-blackflag:before{content:'\1F3F4';}
+.i-ok:before{content:'\1F44C';}
+.i-star:before{content:'\2B50';}
+.i-stop:before{content:'\26D4';}
+.i-truck:before{content:'\1F69A';}
+
+.i-wait:before{content:'\21BB';}
+.i-wait{display:inline-block;}
+
+.spin{animation:spin 1s infinite linear}
+.fadein{animation:fadein 1s}
+.fadeout{animation:fadeout 1s}
+.zoomin {animation:zoomin 1.0s}
+
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
+@keyframes fadeinout{0%,100%{opacity:0;} 50%{opacity:1;}}
+@keyframes fadein{from{opacity:0} to{opacity:1}}
+@keyframes fadeout{from{opacity:1} to{opacity:0}}
+@keyframes zoomin{from{transform:scale(0)} to{transform:scale(1)}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+header{overflow:hidden;}
+
+.positionBox{position:relative;}
+.positionTopL{position:absolute;left:0;top:0;}
+.positionTopR{position:absolute;right:0;top:0;}
+.positionBotL{position:absolute;left:0;bottom:0;}
+.positionBotR{position:absolute;right:0;bottom:0;}
+.positionMid{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+
+
+
+
+.padLR {padding:0 var(--res-cnr);}
+.pad-4 {padding:var(--res-cnr);}
+
+
+.tooltip{font-size:0.8rem;background-color:#000;color:#fff;display:inline-block;padding-left:0.4rem;padding-right:0.4rem;text-align:center;border-radius:50%;text-decoration:none;box-shadow:3px 3px 6px #777;}
+
+
+
+
+
+
+
+.width-100{width:100%;}
+.width-80{width:80%;}
+.width-60{width:60%;}
+.width-50{width:50%;}
+.width-40{width:40%;}
+.width-20{width:20%;}
+
+.spacerV-5{min-height:5px;}
+.spacerV-10{min-height:10px;}
+.spacerV-20{min-height:20px;}
+.spacerV-30{min-height:30px;}
+.spacerV-40{min-height:40px;}
+.spacerV-50{min-height:50px;}
+.spacerV-60{min-height:60px;}
+.spacerV-70{min-height:70px;}
+
+.spacerH-5{min-width:5px;}
+.spacerH-10{min-width:10px;}
+.spacerH-15{min-width:15px;}
+.spacerH-20{min-width:20px;}
+.spacerH-25{min-width:25px;}
+.spacerH-30{min-width:30px;}
+
+
+
+
+
+
+
+.flex-center-all{display: flex;justify-content: center;align-items: center;}
+.flex-center-v{display: flex;flex-direction: column;justify-content: center;}
+.flex-center-h{display: flex;align-items: center;}
+.flex-row{display:flex;flex-flow: row nowrap;}
+
+
+
+.hide{display:none;}
+.show{display:block;}
+
+
+
+
+.even div:nth-child(even){background:var(--L3);}
+.odd div:nth-child(odd){background:var(--L3);}
+
+
+
+.ssbox {width:100%;position:relative;}
+.ssbox > img, .ssbox > div {opacity:0;}
+.ssbox > img:nth-child(n+2) {position:absolute;top:0;left:0;}
+.ssbox > div:nth-child(n+2) {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.ssright{text-align:right;display:inline-block;}
+
+.ssani-3{opacity:0;animation: ss-3 15s infinite;}
+@keyframes ss-3 {0%,100%,40% { opacity: 0; }7%,33% { opacity: 1; }}
+.ssani-4{opacity:0;animation: ss-4 20s infinite;}
+@keyframes ss-4 {0%,100%,32% { opacity: 0; }7%,25% { opacity: 1; }}
+.ssani-5{opacity:0;animation: ss-5 25s infinite;}
+@keyframes ss-5 {0%,100%,27% { opacity: 0; }7%,20% { opacity: 1; }}
+.ssani-6{opacity:0;animation: ss-6 30s infinite;}
+@keyframes ss-6 {0%,100%,23% { opacity: 0; }7%,16% { opacity: 1; }}
+.ssani-7{opacity:0;animation: ss-7 35s infinite;}
+@keyframes ss-7 {0%,100%,21% { opacity: 0; }7%,14% { opacity: 1; }}
+.ssani-8{opacity:0;animation: ss-8 40s infinite;}
+@keyframes ss-6 {0%,100%,19% { opacity: 0; }7%,12% { opacity: 1; }}
+.ssani-9{opacity:0;animation: ss-9 45s infinite;}
+@keyframes ss-9 {0%,100%,18% { opacity: 0; }7%,11% { opacity: 1; }}
+
+.sschild-2{animation-delay:5s;}
+.sschild-3{animation-delay:10s;}
+.sschild-4{animation-delay:15s;}
+.sschild-5{animation-delay:20s;}
+.sschild-6{animation-delay:25s;}
+.sschild-7{animation-delay:30s;}
+.sschild-8{animation-delay:35s;}
+.sschild-9{animation-delay:40s;}
+
+
+
+
+
+
+.tableBox{overflow-x:scroll;max-width:100%;}
+.tableBox td:first-child, .tableBox th:first-child{position:sticky;left:0;font-weight:bold;}
+.tableBox thead th{background:var(--L2);min-width:100px;}
+.tableBox tbody td{text-align:center;}
+.tableBox tbody tr:nth-of-type(even){background:var(--L3);}
+.tableBox tbody tr:nth-of-type(odd){background:white;}
+.tableBox tfoot td{text-align:right;background:var(--L2);font-weight:bold;padding-right:5px;}
+.tableBox tbody tr:nth-of-type(2n+1) > td:first-child{background-color:white;}
+.tableBox tbody tr:nth-of-type(2n+2) > td:first-child{background:var(--L3);}
+
+
+
+.polaroid{width:fit-content;padding: 10px 10px 10px 10px;border: 1px solid #BFBFBF;background-color: white;box-shadow: 10px 10px 5px #aaaaaa;text-align:center}
+  
+.rotate-r{transform: rotate(3deg);}
+.rotate-l{transform: rotate(-3deg);}
+
+.scrollBox{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:20px 0;}
+.scrollItem{flex: 0 0 auto;}
+
+.tab{border-radius:5px 5px 0 0;
+    padding:10px 5px;
+    margin:0 2px;
+    background-color:#e8e8e8;}
+.tabActive{border-bottom:1px solid white;background-color:white;}
+
+/* Form CSS */
+
+.button,button,input,optgroup,select,textarea{font-family:inherit;font-size:1rem;line-height:1rem;margin:0}
+fieldset,legend{margin: 0 1vw;}
+fieldset{border-width: 0;padding: 0;margin:0;}
+label,legend{display: block;font-weight: bold;padding:0px;margin-bottom:0.5rem;}
+
+input:required,textarea:required,select:required,input:invalid,textarea:invalid,select:invalid{background-color:hsl(0, 100%, 97%);}
+input:optional,textarea:required,select:required,input:valid,textarea:valid,select:valid{background-color:hsl(120, 100%, 97%);}
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {padding:3px 15px;vertical-align: middle;text-align: center;border-radius:10px;text-decoration:none;font-weight:bold;color:black;cursor:pointer;box-shadow:3px 3px 6px #777;white-space:nowrap;display:inline-block;border:1px solid black;outline:0;background-color:var(--L2);}
+
+.button:focus, button:focus, input[type='button']:focus, input[type='reset']:focus, input[type='submit']:focus {box-shadow:3px 3px 6px #777 inset;background-color:var(--Mid); }
+
+
+input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="reset"]):not([type="button"]), textarea, select {
+	appearance: none;
+	height: 2.0rem;
+	vertical-align: middle;
+	width: 100%;padding:0 0.5rem;
+}
+input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]):not([type="reset"]):not([type="button"]):focus, textarea:focus, select:focus {
+outline: 0;
+background-color:#ffffff;
+}
+
+.input,select,textarea{
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+
+span.passspan{border:1px solid #999;border-radius: 5px;margin-bottom:0.5rem;width:100%;}
+span.passspan > input[type="password"],span.passspan > input[type="text"]{
+  appearance: none;
+	border:none;
+	height: 2.0rem;
+	vertical-align: middle;
+	margin-bottom:0px;
+}
+span.passspan > input[type="password"]:focus,span.passspan > input[type="text"]:focus{border:none;outline:0;}
+span.passspan a {padding:0 5px;line-height:2rem;vertical-align: middle;}
+
+input[type="checkbox"]:optional + span{background-color:hsl(120, 100%, 97%);}
+input[type="checkbox"]:required + span{background-color:hsl(0, 100%, 97%);}
+input[type="checkbox"]:required:checked + span{background-color:hsl(120, 100%, 97%);}
+
+textarea {height:6rem;overflow:auto;resize:vertical;}
+
+.captchaTxt{max-width:70px;margin-right:10px;}
+.captchaImg{object-fit: contain;}
+
+.btn-dn{box-shadow:3px 3px 6px #777 inset;outline:0;background-color:var(--Mid);}
+.btn-up::before{content:'\002B';}
+.btn-dn::before{content: "\2212";}
+
+
+
+
+
+
+.faq-qst{font-weight:bold;margin: 0 1vw;}
+.faq-ans{margin: 10px 3vw;margin-bottom:15px;}
+
+.nowrap{white-space:nowrap;}
+
+.grid-2 {display:grid;grid-gap:1rem;grid-template-rows:auto auto;padding:1rem;}
+.grid-3col {display:grid;grid-gap:1rem;grid-template-columns:auto auto auto;padding:1rem;}
+.grid-4col {display:grid;grid-gap:1rem;grid-template-columns:auto auto auto auto;padding:1rem;}
+
+
+@media only screen and (orientation:landscape){
+:root{--res-cnr:10px;}
+body{margin:0;padding-bottom:20px;}
+#brandmenu{position:static;}
+#menubar{order:2;}
+}
+
+
+
+@media only screen and (orientation:landscape) and (min-width:805px){
+:root{--res-cnr:10px;}
+body{margin:10px 0;background-color:var(--L3);background-image:linear-gradient(var(--L3), var(--D3));background-attachment:fixed;}
+#acornBox{width:800px;margin:auto;border:2px solid #ffffff;border-radius:15px;box-shadow:3px 3px 7px #777;background:var(--Light);padding-bottom:20px;}
+#brandmenu{position:static;width:100%;border-radius:15px 15px 0 0;}
+#brand{height:80px;font-size:70px;line-height:90px;border-radius:15px 15px 0 0;background-image:linear-gradient(var(--D3), var(--L3));}
+#menubar{order:2;}
+
+
+.grid-2 {display:grid;grid-gap:1rem;grid-template-columns:auto auto;padding:1rem 1rem;}
+}
+
+</style>
+
+<script>
+function getid(e){return document.getElementById(e);}
+
+function makeClick(){var audio = getid("audio");audio.play();}
+
+function accordion(g,h){var z = getid('accdn'+g+'-box');z.classList.toggle(h);var x = getid('accdn'+g+'-txt');x.classList.toggle('show');var y = getid('accdn'+g+'-ctl');if(y.classList.contains('i-minus')){y.classList.toggle('i-plus');}if(y.classList.contains('i-arrow-dn')){y.classList.toggle('i-arrow-up');}}
+
+function setCookie(cname,cvalue,exdays=365){var d=new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));var expires="expires="+d.toUTCString();document.cookie=cname+"="+cvalue+";"+expires+";path=/"}
+
+function getCookie(cname){var name=cname+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i+=1){var c=ca[i];while(c.charAt(0)==' '){c=c.substring(1)}if(c.indexOf(name)==0){return c.substring(name.length,c.length)}}return ""}
+
+function includeHTML(){var z,i,elmnt,file,xhttp;z=document.getElementsByTagName("*");for(i=0;i<z.length;i+=1){elmnt=z[i];file=elmnt.getAttribute("include-html");if(file){xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState==4){if(this.status==200){elmnt.innerHTML=this.responseText}if(this.status==404){elmnt.innerHTML="Content not found."}elmnt.removeAttribute("include-html");includeHTML()}};xhttp.open("GET",file,true);xhttp.send();return}}}
+
+function openTab(evt, tabName) {
+  var i, x, tabs;
+  x = document.getElementsByClassName("tabContent");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tabs = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    tabs[i].className = tabs[i].className.replace(" tabActive", "");
+  }
+  if(tabName != 'none'){
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " tabActive";
+  }
+}
+
+function copyText(txt) {
+var doc = document;
+
+    // Create temporary element
+    var textarea = doc.createElement('textarea');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity  = '0';
+    textarea.textContent    = txt;
+
+    doc.body.appendChild(textarea);
+
+    textarea.focus();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+ doc.execCommand("copy");
+ textarea.remove();
+}
+
+function passhide(g){
+  var z = getid('password'+g);
+  var x = getid('passhide'+g);
+  if(z.type === 'password'){
+    z.type = 'text';
+    x.innerHTML = 'hide'
+  }
+  else{
+    z.type = 'password';
+    x.innerHTML = 'show';
+  }
+}
+</script>
+
 
 </head><body>
-<div id="container">
+<div id="acornBox">
 
 <div id="brandmenu">
-<div id="brand" class="bgd-dtol nowrap"><span class="nowrap">AcornCSS</span></div>
+  <div id="brand" class="nowrap"><span class="nowrap">AcornCSS</span></div>
+<div id="menubar"><a class="button" href="#open-menu">Menu</a><a href="tel:11111111" class="button">Call</a><a href="http://formmail.com.au" target="_blank" class="button">Email</a><a href="sms://11111111" class="button">SMS</a></div>
 </div>
 
-<div class="pad-lr">
+
+
+<div id="open-menu" class="overlay">
+<div class="modal card">
+<header class="cardHeader padLR font-14 flex-center-v">Menu</header>
+<div class="cardBody padLR">
+<nav>
+<ol>
+<li><a href="http://can.com">Link</a></li>
+<li><a>Link</a></li>
+<li><b class="font-12">Heading</b>
+<ol>
+<li><a>Link</a></li>
+<li><a>Link</a></li>
+<li><b class="font-12">Heading</b>
+<ol>
+<li><a>Link</a></li>
+</ol></li>
+</ol></li>
+<li><a>Link</a></li>
+</ol>
+</nav>
+</div>
+<div class="cardFooter flex-center-all"><a href="#!" title="Close" class="button bgcolGray1">Close</a></div>
+    </div>
+</div>
+
+
+<div class="padLR">
 <h1>What is AcornCSS?</h1>
 
-<div>Status: In development. Version:0.2</div>
+<p>Version: 0.3</p>
+<p>Status: Production ready. I am currently using it on a live site.</p>
+<p>To Do: A whole lot of organisation and tidying needed. Some updating needed.</p>
+<p>Credits: This work is a compilation of others work and some original work over many years. I would like to credit others work, but I dont know who created what...</p>
+<p>CSS and JS are inserted into this html page, mainly because i am developing on Android. Also so that the CSS and JS files are not remotely called from here. You can move them to separate files on your webspace if you want.</p>
 
 <ul><h2>Features</h2>
-<li><strong>Designed Mobile First - </strong>Mobile First Design means that you won't find any "hover" CSS in this framework. touch screens don't use hover. Mobile First means designing for portrait mode with fallback for landscape orientation. If in landscape mode the screen width is less than 1000px then AcornCSS assumes you are using a simple mobile or watch and keeps the design in Portrait mode.</li>
+<li><strong>Designed Mobile First - </strong>Mobile First Design means that you won't find any "hover" CSS in this framework. Touch screens don't use hover. Mobile First means designing for portrait mode with fallback for landscape orientation. If in landscape mode the screen width is less than 805px then AcornCSS assumes you are using a simple mobile or watch and keeps the design in Portrait mode.
+</li>
 
 <li><strong>Small - </strong>AcornCSS does not change browser default unless necessary. AcornCSS only includes frequently needed functions.</li>
 
-<li><strong>Easy to Remember - </strong>We use Structural Naming Conventions. All classnames describe what the class is <strong>FOR</strong>. For instance the classname "clearFloat" clears a float, the classname "width-50" makes an object 50% of its parent (generally the viewport). This way classnames become very easy to remember. We use camelCase for ease of reading without lengthening the classname. Smaller CSS file.</li>
+<li><strong>Easy to Remember - </strong>We use Structural Naming Conventions. All classnames describe what the class is <strong>FOR</strong>. For instance the classname "clearFloat" clears a float, the classname "width-50" makes an object 50% of its parent (generally the viewport). This way classnames become very easy to remember. We use camelCase where classnames are all letters and a hypen to separate numbers. This benefits ease of reading without lengthening the classname and increasing the size of the CSS file.</li>
 
+<li><strong>Themed - </strong>We use one colour for theming - and 3 lighter shades and 3 darker shades of that colour. Since our themes are basically one colour - you never have colours clashing. At the end of the day simpler is better. You just have to enter the Hue and Saturation of your favourite color. Check your favourite search engine for "hsl color conversion".
 </ul>
-<div class="card pad-lr center-txt bgcol-alert"><p><strong>This page demonstrates AcornCSS, as it is designed Mobile First - you should be viewing it in a mobile.</strong></p></div>
+<div class="card padLR txtCenter bgcol-alert"><p><strong>This page demonstrates AcornCSS, as it is designed Mobile First - you should be viewing it in a mobile.</strong></p></div>
 
-<div class="spacer-10"></div>
+<div class="spacerV-10"></div>
 
-<h2>Typography</h2>
+<h2>AcornCSS Typography</h2>
 <p>Default font size is 100% - in other words whatever is the default in the current browser. Most other frameworks use pixels and on mobile it's too small and on desktop too big. 100% is the perfect size to read - turn your mobile to portrait and see the text become smaller, then bigger when you turn back to portrait.</p>
 <p>All font sizes are based on rem, not pixels not em. this means they scale properly. Classname "font-12" is 20% bigger (1.2rem) or 120% of default browser font size.</p>
 <p>Most other frameworks build on what has gone before and include all sorts of obsolete junk (like using pixels for font size). We have designed AcornCSS from the start for mobile devices.</p>
 
+<h3>Text Shadows</h3>
+<p>
+<span class="txtShadow font-14"><b>I love black shadows. </b></span>
+<span class="txtShadowD3 font-14"><b>I love D3 shadows. </b></span>
+<span class="txtShadowBlackGlow font-14"><b>I love glowing black text. </b></span>
+<span class="txtShadowWhiteGlow font-14"><b>I love glowing white text. </b></span>
+</p>
 
-<h1>AcornCSS images</h1>
-<p>A website is mostly made up of images and text. Therefore these are our primary focus. Text is put into a text box that simply gives padding on the left and right (pad-lr). Images can also be put into this div to give padding or made fullscreen.</p>
+<div class="spacerV-5"></div>
+
+<h3>Headings</h3>
+<h1>h1 Heading</h1>
+<h2>h2 Heading</h2>
+<h3>h3 Heading</h3>
+<h4>h4 Heading</h4>
+<h5>h5 Heading</h5>
+<h6>h6 Heading</h6>
+
+<div class="spacerV-20"></div>
+
+<p class="txtHero">Hero Text is a big centered bunch of text.</p>
+
+<div class="spacerV-20"></div>
+
+<h2>AcornCSS Images</h2>
+<p>A website is mostly made up of images and text. Therefore these are our primary focus. Text is put into a text box that simply gives padding on the left and right (padLR). Images can also be put into this div to give padding or made fullscreen.</p>
 </div>
 
-<h5 class="pad-lr">Full width image</h5>
+<h3 class="padLR">Full width image</h3>
 <img src="sunset.jpg" alt="sunset image">
 
-<div class="pad-lr">
+<div class="padLR">
 
 <h5>Image in cards</h5>
-<div class="card"><img src="sunset.jpg" alt="sunset image" class="rndcnr-top">
-<p class="center-txt">Explanation of photo at bottom</p>
+<div class="card bgcolWhite"><img src="sunset.jpg" alt="sunset image" class="rndcnrT">
+<p class="txtCenter">Explanation of photo at bottom</p>
 </div>
-<div class="card">
-<p class="center-txt">Explanation of photo at top</p>
-<img src="sunset.jpg" alt="sunset image" class="rndcnr-bot">
+<div class="card bgcolWhite">
+<p class="txtCenter">Explanation of photo at top</p>
+<img src="sunset.jpg" alt="sunset image" class="rndcnrB">
 </div>
 <h5>A card 60% width and centered</h5>
-<img src="sunset.jpg" alt="sunset image" class="card width-60 center-blk">
+<img src="sunset.jpg" alt="sunset image" class="card width-60 centerBox">
 
 
-<div class="card">
-<h3 class="pad-lr">A card with header, full width image and text</h3>
+<div class="card bgcolWhite">
+<h3 class="padLR">A card with header, full width image and text</h3>
 <img src="sunset.jpg" alt="sunset image">
-<div class="pad-lr">
-<p class="center-txt">centered text to explain the nice sunset</p>
+<div class="padLR">
+<p class="txtCenter">centered text to explain the nice sunset</p>
 <p>text text and more text</p>
 <p>text text and more text</p>
 <p>text text and more text</p>
@@ -72,40 +622,71 @@
 
 <h2>Scattered Polaroid Images</h2>
 <p>Something a little different to do with images.</p>
-<div class="spacer-10"></div>
-<div class="polaroid rotate-r center-blk">
+<div class="spacerV-10"></div>
+<div class="polaroid rotate-r centerBox">
   <img src="https://picsum.photos/284/213?random=1" alt="Random image" width="284" height="213">
   <p>A random image</p>
 </div>
 
-<div class="polaroid rotate-l center-blk">
+<div class="polaroid rotate-l centerBox">
   <img src="https://picsum.photos/284/213?random=2" alt="Random image" width="284" height="213">
   <p>Another random image.</p>
 </div>
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
+
+<h3>ScrollBox Example</h3>
+<p>Used where horizontal items need a bit of room and you dont want them cascading down.</p>
+<div class="scrollBox bgcol-L3">
+<div class="spacerH-20"></div>
+<div class="polaroid rotate-l scrollItem">
+  <img src="https://picsum.photos/140/100?random=3" alt="Random image">
+  <p>Another random<br>image.</p>
+</div>
+<div class="spacerH-20"></div>
+<div class="polaroid rotate-r scrollItem">
+  <img src="https://picsum.photos/140/100?random=4" alt="Random image">
+  <p>Another random<br>image.</p>
+</div>
+<div class="spacerH-20"></div>
+<div class="polaroid rotate-l scrollItem">
+  <img src="https://picsum.photos/140/100?random=5" alt="Random image">
+</div>
+<div class="spacerH-20"></div>
+<div class="polaroid rotate-l scrollItem">
+  <img src="https://picsum.photos/140/100?random=6" alt="Random image">
+</div>
+<div class="spacerH-20"></div>
+<div class="polaroid rotate-r scrollItem">
+  <img src="https://picsum.photos/140/100?random=7" alt="Random image">
+</div>
+<div class="spacerH-20"></div>
+
+</div>
+<div class="spacerV-20"></div>
+
 </div>
 
-<h5 class="pad-lr">Image floated left and right with odd/even background colours.</h5>
+<h5 class="padLR">Image floated left and right with odd/even background colours.</h5>
 <div class="odd">
-<div class="floatbox pad-4">
-<img class="floatright" src="judy.jpg" alt="judy">
+<div class="floatBox pad-4">
+<img class="floatRight" src="judy.jpg" alt="judy">
 <h4>Judy</h4>
 <p>Tiny picture for movie floated right with text wrapped.</p>
 </div>
-<div class="floatbox pad-4">
-<img class="floatleft" src="knivesout.jpg" alt="knives out">
+<div class="floatBox pad-4">
+<img class="floatlLeft" src="knivesout.jpg" alt="knives out">
 <h4>Knives Out</h4>
 <p>Tiny picture for movie floated left with text wrapped and alternate colours.</p>
 </div>
-<div class="floatbox pad-4">
-<img class="floatright" src="littlewomen.jpg" alt="little women">
+<div class="floatBox pad-4 odd">
+<img class="floatRight" src="littlewomen.jpg" alt="little women">
 <h4>Little Women</h4>
 <p>Tiny picture for a movie floated right with text wrapped and paragraphed.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet dui accumsan sit amet nulla facilisi. Imperdiet dui accumsan sit amet nulla facilisi morbi tempus iaculis.</p>
 </div>
 </div>
 
-<div class="pad-lr"><h2>A Slideshow</h2>
+<div class="padLR"><h2>A Slideshow</h2>
 <p>It seems every website has one of these - I think they suck, but, here's one anyway. Each image or div shows for 5 seconds. Available for 3 to 9 images or divs.</p>
 </div>
 
@@ -115,45 +696,67 @@
 <img class="ssani-3 sschild-3" src="https://picsum.photos/1200/300?random=3" alt="">
 </div>
 
-<div class="pad-lr">
+<div class="padLR">
 <p>Can also be used with divs to make a testamonials type slideshow.</p>
 </div>
 
-<div class="ssbox center-txt">
-<div class="ssani-4 pad-lr width-80 center-blk card"><div class="ssright"><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p><i>Spiderman</i></p></div></div>
-<div class="ssani-4 sschild-2 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">Groovy name!</p><p><i>Superman</i></p></div></div>
-<div class="ssani-4 sschild-3 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">In a class of it's own.</p><p><i>Wonderwoman</i></p></div></div>
-<div class="ssani-4 sschild-4 pad-lr card width-80 center-txt"><div class="ssright"><p class="font-14">Brilliant! Boy Wonder</p><p><i>Batman</i></p></div></div>
+<div class="ssbox txtCenter">
+<div class="ssani-4 padLR width-80 centerBox card"><div class="ssright"><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p class="font-14">One of the best CSS Frameworks around. dffg ght ght </p><p><i>Spiderman</i></p></div></div>
+<div class="ssani-4 sschild-2 padLR card width-80 txtCenter"><div class="ssright"><p class="font-14">Groovy name!</p><p><i>Superman</i></p></div></div>
+<div class="ssani-4 sschild-3 padLR card width-80 txtCenter"><div class="ssright"><p class="font-14">In a class of it's own.</p><p><i>Wonderwoman</i></p></div></div>
+<div class="ssani-4 sschild-4 padLR card width-80 txtCenter"><div class="ssright"><p class="font-14">Brilliant! Boy Wonder</p><p><i>Batman</i></p></div></div>
 
 </div>
-<div class="spacer-20"></div>
-<div class="pad-lr">
+<div class="spacerV-20"></div>
+<div class="padLR">
 
 <h2 id="modalh">Modals can be useful</h2>
+<p>We use modals instead of pop-up boxes or tooltips. Modals are super easy to see and look great on any device. We use a white background rather than the usual black.</p>
 
-<a class="button bgcol-L3" href="#open-modal">Click to view Modal</a>
+<a class="button bgcol-L3" href="#open-modal">Terms and Conditions</a>
 
 <div id="open-modal" class="overlay">
-<div class="modal rndcnr-4">
-<header class="modal-head bgcol-L3 rndcnr-top pad-lr"><h5>Terms and Conditions</h5></header>
-<div class="modal-body pad-lr">
+<div class="modal">
+<div class="card">
+<header class="cardHeader padLR"><h5>Terms and Conditions</h5></header>
+<div class="cardBody padLR bgcolWhite">
 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit proin eu, mi turpis pharetra facilisi hac vestibulum fermentum risus volutpat, curabitur hendrerit parturient orci posuere cras natoque viverra. Fusce id viverra habitasse interdum mi sed turpis, nullam odio ultricies curabitur netus porttitor metus, faucibus tempor lacinia laoreet sem aenean. Odio hendrerit vel interdum natoque dapibus volutpat augue justo, cursus class eros venenatis blandit primis ante, aptent aliquam imperdiet erat cras convallis massa.</p> <p>Porta taciti penatibus commodo varius facilisi egestas nisl integer phasellus, congue cubilia fringilla turpis conubia massa iaculis urna, facilisis sapien magnis mollis praesent tempus ligula mi. Curabitur consequat porttitor tempor sem purus auctor condimentum ante, praesent tempus per quisque suspendisse porta sollicitudin blandit sociosqu, et ullamcorper semper posuere rutrum curae fusce. Aliquam pharetra aliquet elementum luctus ultricies risus parturient condimentum suspendisse enim nisi rutrum volutpat, tincidunt dictumst habitasse praesent integer natoque odio purus nec etiam ligula. Dictumst nascetur pellentesque phasellus netus fermentum nisl duis laoreet curabitur bibendum, interdum hendrerit sagittis habitasse venenatis tempus felis himenaeos eu, iaculis ridiculus habitant dis non nibh metus penatibus id.</p> <p>Primis lobortis a convallis erat condimentum potenti diam euismod per, nunc duis tempor ridiculus praesent sollicitudin sagittis conubia risus commodo, est fusce vestibulum metus nisl nullam dui aenean. Fames posuere tempor tristique facilisis varius habitasse nec at, sagittis faucibus fringilla mus dignissim penatibus curabitur inceptos, convallis imperdiet malesuada cras aliquet non proin. Netus suspendisse dui elementum condimentum sed non habitasse augue, congue etiam egestas eleifend sagittis ridiculus inceptos sodales, massa gravida dictumst vitae feugiat dis enim.</p> <p>Id netus cursus pellentesque justo metus sociosqu primis fermentum eros cras, morbi vestibulum dictumst hac eu orci placerat porta turpis. Sem non risus himenaeos tortor arcu per nunc odio, molestie sociis porta tristique cum fusce mi, erat quisque morbi dictumst natoque faucibus pretium. Facilisis per sed velit accumsan magnis parturient in, ut eu sodales primis pretium neque, rhoncus urna eget sociis proin lobortis. Dapibus ligula pellentesque ad sollicitudin cras euismod auctor nam quis, vehicula aliquam eu bibendum integer volutpat venenatis odio etiam, lacus conubia potenti purus primis sagittis vestibulum a.</p> <p>Cras turpis leo platea sodales eu risus velit curae faucibus tempor sociosqu et torquent, sapien nulla porttitor nibh varius nostra montes magnis metus suspendisse augue eleifend. Volutpat praesent curabitur tortor facilisis ultrices nullam est libero hac maecenas felis duis, ad accumsan montes blandit mollis taciti orci senectus turpis malesuada penatibus tincidunt, integer a inceptos torquent quam laoreet neque netus quis lacinia etiam. Augue velit ac litora nascetur rutrum mattis donec ultricies tempus varius nisl, condimentum dignissim auctor habitasse conubia lobortis sodales vitae nam sollicitudin bibendum class, et eu ad senectus duis ridiculus erat pulvinar justo metus.</p>
 </div>
-<div class="modal-foot flex-center-all bgcol-L3 rndcnr-bot"><a href="#modalh" title="Close" class="button bgcolGray1">I Agree</a></div>
+<div class="cardFooter flex-center-all"><a href="#!" title="Close" class="button bgcolGray1">I Agree</a></div>
     </div>
-</div>
+</div></div>
 
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
-<div class="card bgcol-info pad-lr"><p><div include-html="content.html"></div></p></div>
+<a class="button bgcol-L3" href="#ctmodal" onclick="copyText('https://myrss.com/feed.xml')">RSS Feed - Click to Subscribe</a>
+<div id="ctmodal" class="overlay">
+<div class="modal alertGreen width-50 positionBox"><p>
+<a href="#!" class="close" title="Close Modal">&times;</a>
+The RSS Feed url has been copied to your clipboard. Just paste into your favourite RSS Feed Reader.
+</p></div></div>
 
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
-<h2>Tables that are responsive</h2>
+<p>What is a Kalamazoo? <a class="tooltip" href="#kzoo">?</a></p>
+<div id="kzoo" class="overlay">
+<div class="modal width-50 alertBlue"><p>
+<a href="#!" class="close" title="Close Modal">&times;</a>
+It's a musical instrument.
+</p></div></div>
 
-<div class="tablebox">
+<div class="spacerV-20"></div>
+
+<div class="card bgcol-L3 padLR"><p><div include-html="content.html"></div></p></div>
+
+<div class="spacerV-20"></div>
+
+<h2>Tables that scroll</h2>
+
+<div class="tableBox">
 <table>
-<tr><th>Name</th><th>Street Address</th><th>City</th><th>Postcode</th><th>State</th><th>Country Code</th><th>Phone</th><th>Email</th></tr>
+<thead><tr><th>Name</th><th>Street Address</th><th>City</th><th>Postcode</th><th>State</th><th>Country Code</th><th>Phone</th><th>Email</th></tr></thead>
+
+<tbody><tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
 
 <tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
 
@@ -163,11 +766,12 @@
 
 <tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
 
-<tr><td>Jeremy Tontabildas</td><td>67 Humble Pie Drive</td><td>Pasadena</td><td>123456</td><td>Twildas</td><td>AU</td><td>1234567123456</td><td>any@anybodyoutthere.com.au</td></tr>
-
+</tbody>
+<tfoot><tr><td>Total:</td><td colspan="6"></td><td>$ 2334455</td></tr>
 </table></div>
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
+<h3>Tabs that scroll</h3>
 </div>
 
 <div class="scrollBox bgcol-L3" style="padding:10px 0 0 2px;">
@@ -177,27 +781,27 @@
     <button class="scrollItem tab" onclick="openTab(event,'tab3')">Returns xxxxxxxxxx</button>
   </div>
   
-  <div id="tab1" class="tabContent positionBox hide pad-lr">
+  <div id="tab1" class="tabContent positionBox hide padLR">
     <h2>Shipping</h2>
     <p>Lots of text about our shipping.</p>
   </div>
 
-  <div id="tab2" class="tabContent positionBox hide pad-lr">
+  <div id="tab2" class="tabContent positionBox hide padLR">
     <h2>Payment</h2>
     <p>You can pay via Credit Card or your PayPal Balance to our PayPal account.</p>
     
 <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><img src="https://www.paypalobjects.com/webstatic/mktg/logo/PP_AcceptanceMarkTray-NoDiscover_243x40.png" alt="Buy now with PayPal" /></td></tr></table><!-- PayPal Logo -->
   </div>
 
-  <div id="tab3" class="tabContent positionBox hide pad-lr">
+  <div id="tab3" class="tabContent positionBox hide padLR">
     <h2>Returns</h2>
     <p>Contact us if you need to make a return. No returns without authorisation number.</p>
   </div>
-  <div class="spacer-5 bgcol-L3"></div>
+  <div class="spacerV-5 bgcol-L3"></div>
 
-<div class="pad-lr">
+<div class="padLR">
 
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
 
 
@@ -207,18 +811,13 @@
 <h5>We use native utf-8 icons - why bother adding an icon library when utf-8 has tons.</h5>
 <div class="font-14">
 <span class="i-wait spin"></span> Wait
-<br>
-<span class="i-home"></span> Home
-<br>
-<span class="i-mobile"></span> Mobile
-<br>
-<span class="i-email"></span> Email
-<br>
-<span class="i-smiley"></span> Smiley
-<br>
-<span class="i-minus"></span> Minus
-<br>
-<span class="i-plus"></span> Plus
+<br><span class="i-home"></span> Home
+<br><span class="i-eye"></span> Eye
+<br><span class="i-mobile"></span> Mobile
+<br><span class="i-email"></span> Email
+<br><span class="i-smiley"></span> Smiley
+<br><span class="i-minus"></span> Minus
+<br><span class="i-plus"></span> Plus
 <br><span class="i-menu"></span> Menu
 <br><span class="i-cross"></span> Cross
 <br><span class="i-tick"></span> Tick
@@ -240,40 +839,54 @@
 <br><span class="i-ok"></span> OK
 <br><span class="i-star"></span> Star
 <br><span class="i-stop"></span> Stop
+<br><span class="i-truck"></span> Truck
 </div>
 
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
-<p>Lets test some headings</p>
-<h1>h1 Domain Name</h1>
-<h2>h2 Domain Name</h2>
-<h3>h3 Domain Name</h3>
-<h4>h4 Domain Name</h4>
-<h5>h5 Domain Name</h5>
-<h6>h6 Domain Name</h6>
 
-<div class="spacer-20"></div>
+
+<div class="spacerV-20"></div>
 
 <h1>Alerts</h1>
-<div class="bgcol-alert pad-lr alert">
-<span onclick="this.parentElement.style.display='none'" class="close i-cross"></span>
-<h1 class="i-warning"> Warning</h1>
-<p>Text goes here.</p>
+<div class="alertGold">
+<p>alertGold: Perfect for  a warning notice.</p>
+</div>
+<div class="spacerV-10"></div>
+<div class="alertRed">
+<p>alertRed: Perfect for an error notice.</p>
+</div>
+<div class="spacerV-10"></div>
+<div class="alertGreen">
+<p>alertGreen: Perfect for a success notice.</p>
+</div>
+<div class="spacerV-10"></div>
+<div class="alertTheme">
+<p>alertTheme: Coloured according to the theme. Great for news or explainers.</p>
+</div>
+<div class="spacerV-10"></div>
+<div class="alertBlue">
+<p>alertBlue: Perfect for information notices.</p>
+</div>
+<div class="spacerV-10"></div>
+<div class="alertBW">
+<p>alertBW: Perfect for Black and White notices.</p>
 </div>
 
-<div class="spacer-20"></div>
+
+<div class="spacerV-20"></div>
 
 </div>
 
-<div id="accdn1-box" class="pad-lr">
+<div id="accdn1-box" class="padLR">
 <h4 id="accdn1-ctl" onclick="accordion('1', 'bgcol-L3');" class="i-minus i-plus"> Header with hidden content (Accordion)</h4>
-<div id="accdn1-txt" class="hide pad-lr">
+<div id="accdn1-txt" class="hide padLR">
 <p>a paragraph of info</p>
 <p>More info</p>
 </div></div>
 
-<div class="pad-lr">
-<div id="accdn2-box" class="pad-lr">
+<div class="padLR">
+<div id="accdn2-box" class="padLR">
 <h4 id="accdn2-ctl" onclick="accordion('2', 'card');" class="i-arrow-dn"> Learn all about crunch</h4>
 <div id="accdn2-txt" class="hide">
 <p>crunch is good</p>
@@ -281,16 +894,16 @@
 </div></div>
 </div>
 
-<div class="spacer-20"></div>
+<div class="spacerV-20"></div>
 
 <div class="grid-2">
-<div class="card pad-lr bgcol-L3">
+<div class="card padLR bgcol-L3">
 <h4>Price Examples per year</h4>
 <p>.com.au and .net.au - $21.49</p>
 <p>.sydney and .melbourne - $79.99</p>
 <p>.com, .net - $24.20</p>
 </div>
-<div class="card pad-lr bgcol-L2">
+<div class="card padLR bgcol-L2">
 <h4>Links to our NEW Console</h4>
 <p>If you already have an account:<br><a href="#"><button onclick="makeClick()">Login</button></a></p>
 <p>If you want to search for a Domain Name to register:<br><a href="#"><button onclick="makeClick()">Search</button></a></p>
@@ -298,10 +911,10 @@
 </div>
 </div>
 
-<div class="pad-lr">If you still have Domain Names on our OLD system you can manage them here: <a href="#"><button onclick="makeClick()">Login to Legacy Console</button></a>
+<div class="padLR">If you still have Domain Names on our OLD system you can manage them here: <a href="#"><button onclick="makeClick()">Login to Legacy Console</button></a>
 </div>
 
-<div class="pad-lr">
+<div class="padLR">
 <h2>Support FAQs</h2>
 <div class="faq-qst">How do I transfer a Domain Name?</div>
 <div class="faq-ans">Login to your current registrar's control panel. Check that the domain does not have Domain Privacy and is not locked. Copy the Domain Password. Go to your new registrar and click the transfer in link and enter the domain name to be transferred and the domain password. That's it.</div>
@@ -309,30 +922,46 @@
 <div class="faq-qst">How do I use DNS?</div>
 <div class="faq-ans">Firstly you should only use your Domain Name Registrars DNS as the last option. You should use your Website Hosting DNS as first preference and Email Hosting DNS as second preference. If neither of these provide DNS then you are welcome to use ours. Firstly click the link to manage the Domain Name you want to use DNS. Click the dropdown to park the Domain Name. This gives you the correct Nameservers. Now edit your DNS, you can add A records, MX records and other record types too. You get the correct records from your hosting and email providers. DNS services are self serve.</div>
 
-<h2><span class="i-email"></span> Contact Us</h2>
+<h2>Contact Us</h2>
 <p>Fast knowledgeable Support is offered via email.</p>
+<form action="contactus.php" method="post" target="_blank">
 <div class="grid-2 card bgcol-L3">
 <div>
-<form action="contactus.php" method="post" target="_blank">
+
 <fieldset>
-    <label for="nameField">Your Name</label>
-    <input id="nameField" name="name" type="text" required>
-    <label for="emailField">Your Email</label>
-   <input id="emailField" name="email" type="email" required>
+        <label>Captcha : <span class="font-08">(Refresh page if image is missing.)</span><br>
+       <span class="flex-row"><input class="input captchaTxt" name="uid" type="text" autocomplete="off" required><img class="captchaImg" src="CaptchaImage.gif"></span></label>
+    <label>Your Name<br>
+    <input id="nameField" class="input" name="name" type="text"></label>
+    <label>Your Email<br>
+   <input id="emailField" class="input" name="email" type="email" inputmode="email" required></label>
+   <label>Your Password:<br>
+   <span class="passspan flex-row"><input id="password1" name="password" type="password" value="Hi there!" required><a id="passhide1" onclick="passhide(1)">show</a></span></label>
+   
+   <label><input type="checkbox" required><span> I Agree to Terms</span></label>
    </fieldset>
 </div>
 <div>
 <fieldset>
-    <label for="messageField">Your Message</label>
-    <textarea name="message" id="messageField" required></textarea>
-    <input onclick="makeClick()" value="Send" type="submit">
-  </fieldset>
+<label>Postage:<br>
+<input type="radio" name="post" value="express" required> Express Delivery
+<br><input type="radio" name="post" value="standard" checked> Standard Delivery
+</label>
+<label>Choose your city:<br>
+  <select><option></option><option>Sydney</option><option>Melbourne</option></select>
+</label>
+<label>Your Message<br>
+<textarea name="message" id="messageField" required></textarea>
+</label>
+<label><input class="btn-dn" onclick="makeClick()" value="Send" type="submit">
+</label>
+</fieldset>
 
+
+</div>
+</div>
 </form>
-</div>
-</div>
 
-<p class="txt-hero">Hero Text is a big centered bunch of text.</p>
 
 </div>
 
